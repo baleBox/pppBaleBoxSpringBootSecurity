@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="" lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Add new User</title>
+  <title>Add new Person</title>
 </head>
 <body style="text-align: center;">
 <div>
   <table th:border="1" th:align="center" th:cellspacing="0" th:cellpadding="3">
-    <h2>Add new User</h2>
+    <h2>Add new Person</h2>
     <tr>
-      <form th:method="POST" th:action="@{create}" th:object="${user}">
+      <form th:method="POST" th:action="@{create}" th:object="${person}">
         <th><label for="name">Name</label>
           <input type="text" th:field="*{name}" id="name">
         </th>
@@ -28,7 +28,7 @@
     </tr>
   </table>
   <br>
-  <a href="/users">
+  <a href="/persons">
     <button class="button">Отмена</button>
   </a>
 </div>
