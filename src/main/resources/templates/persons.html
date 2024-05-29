@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="En">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="En"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -10,27 +11,44 @@
     </style>
     <title>Users</title>
 </head>
-<body>
-<h1 style="text-align: center;"><strong>PERSON LIST</strong></h1>
+<body style="text-align: center">
+<h1><strong>PERSON LIST</strong></h1>
+
+<div sec:authorize="isAuthenticated()">
+    Welcome <b><span sec:authentication="name">Username</span></b>
+    &nbsp;
+    <i><span sec:authentication="principal.authorities">Roles</span></i>
+</div>
 <br>
 <br>
 
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
 
+<br>
 
-<div class="text-center"><input type="button" value="Add person" onclick="window.location.href = 'add'"/></div>
+<div class="text-center" sec:authorize="hasAnyAuthority('ADMIN')">
+    <input type="button" value="Add person" onclick="window.location.href = 'add'"/></div>
+
 
 <br>
 <br>
 <!--suppress HtmlDeprecatedAttribute -->
-<table border="1" align="center" cellspacing="0" cellpadding="3">
+<table border="1" align="center" cellspacing="2" cellpadding="10">
+    <thead>
     <tr>
         <th>id</th>
         <th>Name</th>
         <th>Last Name</th>
         <th>Age</th>
         <th>Email</th>
-        <th>Edit/Delete</th>
+
+        <th sec:authorize="hasAnyAuthority('ADMIN')">Edit/Delete</th>
+
     </tr>
+    </thead>
+
     <tr style="text-align:center" th:each="person : ${persons}">
         <th th:text="${person.getId()}" scope="row"></th>
         <td><a th:href="'person_id?id=' + ${person.getId()}" th:text="${person.getName()}"></a>
@@ -40,10 +58,14 @@
         <td th:text="${person.getEmail()}"></td>
         <td>
             <form th:method="POST" th:action="'edit_person?id=' + ${person.getId()}">
-                <input type="submit" value="Изменить"/>
+                <div sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+                    <input type="submit" value="Update person"/>
+                </div>
             </form>
             <form th:method="POST" th:action="'delete_person?id=' + ${person.getId()}">
-                <input type="submit" value="Delete person"/>
+                <div sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+                    <input type="submit" value="Delete person"/>
+                </div>
             </form>
         </td>
     </tr>
