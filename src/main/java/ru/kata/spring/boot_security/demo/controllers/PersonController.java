@@ -38,13 +38,13 @@ public class PersonController {
         return "show";
     }
 
-    @GetMapping("add")
+    @GetMapping("/add")
     public String addPerson(Model model) {
         model.addAttribute("person", new Person());
         return "add_new_person";
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public String createPerson(@ModelAttribute("person") Person person) {
         personService.add(person);
         return "redirect:/persons";
