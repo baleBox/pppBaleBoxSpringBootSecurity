@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.repositories;
 
-import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.models.Person;
 
 import java.util.List;
@@ -16,6 +15,5 @@ public interface PersonDao {
     void edit(Person newDataPerson);
 
     void delete(Long id);
-
 }
 
