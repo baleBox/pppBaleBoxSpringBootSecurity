@@ -3,8 +3,7 @@ package ru.kata.spring.boot_security.demo.repositories;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.models.Person;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import java.util.List;
 
 @Repository
