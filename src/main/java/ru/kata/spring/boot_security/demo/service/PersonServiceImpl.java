@@ -1,6 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.Person;
@@ -9,13 +9,10 @@ import ru.kata.spring.boot_security.demo.repositories.PersonDao;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-  private final PersonDao personDao;
-@Autowired
-    public PersonServiceImpl(PersonDao personDao) {
-        this.personDao = personDao;
-    }
+    private final PersonDao personDao;
 
     @Transactional
     @Override

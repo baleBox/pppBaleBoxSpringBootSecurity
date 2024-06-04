@@ -1,14 +1,25 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "persons")
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +28,7 @@ public class Person {
     private String name;
 
     @Column(name = "last_name")
+
     private String lastName;
 
     @Column(name = "age")
